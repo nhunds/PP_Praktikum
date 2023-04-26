@@ -1,5 +1,5 @@
 package m1
 
-class ConstantSensor(val temperature: Double): Sensor {
-    override fun getTemperature(): Double = temperature
+class ConstantSensor(val temp: Double): Sensor {
+    override fun getTemperature(): Double = temp
 }
