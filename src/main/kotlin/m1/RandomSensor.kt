@@ -1,7 +1,7 @@
 package m1
 
-class RandomSensor() : Sensor {
-    override fun getTemperature(): Double {
-        TODO("Not yet implemented")
-    }
+import kotlin.random.Random
+
+class RandomSensor(val min: Double, val max: Double) : Sensor {
+    override fun getTemperature(): Double = Random.nextDouble(min, max)
 }
