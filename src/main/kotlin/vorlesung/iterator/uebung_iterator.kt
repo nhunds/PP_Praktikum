@@ -1,4 +1,4 @@
-/*
+package vorlesung.iterator/*
 - Implementiert den LinkedListIterator, welcher die Iteration über eine verkettete Liste kapselt
 - Der LinkedListIterator nimmt immer den Startknoten (first) entgegen und verändert diesen im
 Laufe der Iteration

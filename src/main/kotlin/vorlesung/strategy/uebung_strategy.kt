@@ -1,4 +1,4 @@
-/*
+package vorlesung.strategy/*
 In einer kleinen Videospiel Simulation soll ein Spieler durch unterschiedliche Strategien laufen und angreifen können
 Implementiert dazu die abstrakte Strategie Movement mit der Funktion move(): Int. Die Funktion gibt die Bewegung
 in Feldern zurück. Dazu soll es die die folgenden konkreten Strategien geben:
