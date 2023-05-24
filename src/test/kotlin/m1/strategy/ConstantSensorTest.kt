@@ -1,5 +1,6 @@
-package m1
+package m1.strategy
 
+import m1.strategy.ConstantSensor
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*

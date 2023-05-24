@@ -1,5 +1,13 @@
 package m1
 
+import m1.decorator.Fahrenheit
+import m1.decorator.RoundValue
+import m1.decorator.SensorLogger
+import m1.observer.Thermometer
+import m1.strategy.ConstantSensor
+import m1.strategy.IncreasingSensor
+import m1.strategy.RandomSensor
+
 fun main() {
     println("Random sensor:")
     val thermometer = Thermometer(SensorLogger(RandomSensor(2.0, 8.0)))

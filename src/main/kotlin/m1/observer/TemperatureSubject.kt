@@ -1,4 +1,4 @@
-package m1
+package m1.observer
 
 interface TemperatureSubject {
     val observers: MutableList<TemperatureObserver>

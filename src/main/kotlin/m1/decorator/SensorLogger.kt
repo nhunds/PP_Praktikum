@@ -1,4 +1,6 @@
-package m1
+package m1.decorator
+
+import m1.Sensor
 
 class SensorLogger(sensor: Sensor) : SensorDecorator(sensor) {
     override fun getTemperature(): Double {

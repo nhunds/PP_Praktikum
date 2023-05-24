@@ -1,4 +1,4 @@
-package m1
+package m1.observer
 
 class HeatingSystemObserver(
     private val minTemp: Double,

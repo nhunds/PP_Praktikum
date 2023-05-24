@@ -1,11 +1,13 @@
-package m1
+package m1.observer
+
+import m1.Sensor
 
 class Thermometer(var sensor: Sensor) : TemperatureSubject {
     override val observers = mutableListOf<TemperatureObserver>()
     fun measure(times: Int) = repeat(times) {
         val temp = sensor.getTemperature()
 
-        observers.forEach{
+        observers.forEach {
             it.update(temp)
         }
     }
