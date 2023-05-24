@@ -36,14 +36,14 @@ fun main() {
     - Single Responsibility: Da je ein Decorator für eine Funktionalität zuständig ist.
     - Open-Closed Principle: Jeder Decorator ist in sich abgeschlossen aber auf ihm kann aufgebaut werden
     - Program to an interface, not an implementation: Alle Decorator nutzen das Sensor-Interface
-    - Favor Composition over Inheritance: Die Decorator beinhalten den Sensor den sie erweitern als Eigenschaft
+    - Favor Composition over Inheritance: Die Decorator beinhalten den Sensor, den sie erweitern, als Eigenschaft
     - Don't repeat yourself: Es wird vermieden dass, Funktionalität für jeden Sensor erneut implementiert werden muss
      */
     /*
     Observer:
     Mit dem Observer werden mehrere Probleme gelöst. Er verhindert over polling, da hier der Datenhalter bei Änderungen
     die Dateninteressierten aufruft. Verhindert eine harte Kopplung zwischen beiden. Macht die Dateninteressierten
-    zur Laufzeit änderbar. Vermeidet die Anpassung des Datenhalters beim hinzukommen eines neuen Dateninteressierten.
+    zur Laufzeit änderbar. Vermeidet die Anpassung des Datenhalters beim Hinzukommen eines neuen Dateninteressierten.
     Würde er nicht genutzt müssten die Dateninteressierten regelmäßig beim Thermometer nachsehen. Oder Thermometer
     müsste für jeden neuen Dateninteressierten angepasst werden. Hier wäre eine Änderung der Dateninteressierten zur
     Laufzeit schwer möglich.
