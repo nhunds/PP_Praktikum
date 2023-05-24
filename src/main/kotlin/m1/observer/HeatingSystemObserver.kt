@@ -1,8 +1,8 @@
 package m1.observer
 
 class HeatingSystemObserver(
-    private val minTemp: Double,
-    private val maxTemp: Double
+    private val onThreshold: Double,
+    private val offThreshold: Double
 ) : TemperatureObserver {
     private val temperatures = mutableListOf<Double>()
 
@@ -12,10 +12,11 @@ class HeatingSystemObserver(
         if (temperatures.size == 5) {
             val avgTemp = temperatures.sum() / temperatures.size
 
-            if (avgTemp < minTemp)
+            if (avgTemp < onThreshold)
                 println("Heizung an")
-            else if (avgTemp > maxTemp)
+            else if (avgTemp > offThreshold)
                 println("Heizung aus")
+            temperatures.clear()
         }
     }
 }
