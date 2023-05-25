@@ -6,7 +6,8 @@ class HeatingSystemObserver(
 ) : TemperatureObserver {
     private val temperatures = mutableListOf<Double>()
 
-    override fun update(tmp: Double) {
+    override fun update(temperatureSubjectData: TemperatureSubjectData) {
+        val tmp = temperatureSubjectData.temp
         temperatures.add(tmp)
 
         if (temperatures.size == 5) {
