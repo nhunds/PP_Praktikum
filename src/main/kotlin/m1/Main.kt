@@ -1,8 +1,6 @@
 package m1
 
-import m1.decorator.Fahrenheit
-import m1.decorator.RoundValue
-import m1.decorator.SensorLogger
+import m1.decorator.SensorDecorators
 import m1.observer.HeatingSystemObserver
 import m1.observer.TemperatureAlert
 import m1.strategy.ConstantSensor
@@ -55,31 +53,47 @@ fun main() {
     - Loose Coupling: Da die Kopplung über Interfaces erfolgt
      */
     println("Random sensor:")
-    val thermometer = Thermometer(SensorLogger(RandomSensor(2.0, 8.0)))
+    val thermometer = Thermometer(
+        RandomSensor(2.0, 8.0)
+            .decorate(SensorDecorators.logger)
+    )
     thermometer.measure(10)
 
     println("Increasing sensor:")
-    thermometer.sensor = SensorLogger(IncreasingSensor(15.0))
+    thermometer.sensor = IncreasingSensor(15.0)
+        .decorate(SensorDecorators.logger)
     thermometer.measure(10)
 
     println("Constant sensor:")
-    thermometer.sensor = SensorLogger(ConstantSensor(10.0))
+    thermometer.sensor = ConstantSensor(10.0)
+        .decorate(SensorDecorators.logger)
     thermometer.measure(10)
 
     println("Rounded random sensor:")
-    thermometer.sensor = SensorLogger(RoundValue(RandomSensor(2.0, 5.0)))
+    thermometer.sensor = RandomSensor(2.0, 5.0)
+        .decorate(SensorDecorators.roundValue)
+        .decorate(SensorDecorators.logger)
     thermometer.measure(10)
 
     println("Rounded increasing sensor in Fahrenheit")
-    thermometer.sensor = SensorLogger(RoundValue(Fahrenheit(IncreasingSensor(20.0))))
+    thermometer.sensor = IncreasingSensor(20.0)
+        .decorate(SensorDecorators.fahrenheit)
+        .decorate(SensorDecorators.roundValue)
+        .decorate(SensorDecorators.logger)
     thermometer.measure(10)
 
     println("Rounded increasing sensor in Fahrenheit and Celsius")
-    thermometer.sensor = SensorLogger(RoundValue(Fahrenheit(SensorLogger(IncreasingSensor(20.0)))))
+    thermometer.sensor = IncreasingSensor(20.0)
+        .decorate(SensorDecorators.logger)
+        .decorate(SensorDecorators.fahrenheit)
+        .decorate(SensorDecorators.roundValue)
+        .decorate(SensorDecorators.logger)
     thermometer.measure(10)
 
     println("Observer")
-    thermometer.sensor = SensorLogger(RoundValue(RandomSensor(10.0, 50.0)))
+    thermometer.sensor = RandomSensor(10.0, 50.0)
+        .decorate(SensorDecorators.roundValue)
+        .decorate(SensorDecorators.logger)
     val alertObserver = TemperatureAlert(
         alertTemp = 30.0,
         alertMsg = "Ganz schön heiß"
@@ -93,7 +107,7 @@ fun main() {
     thermometer.measure(20)
 
     val constantLogRoundSensor = ConstantSensor(10.5)
-        .decorate(::SensorLogger)
-        .decorate(::RoundValue)
+        .decorate(SensorDecorators.logger)
+        .decorate(SensorDecorators.roundValue)
     println(constantLogRoundSensor.getTemperature())
 }
