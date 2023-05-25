@@ -1,14 +1,16 @@
 package m1.observer
 
+import m1.Thermometer
+
 class HeatingSystemObserver(
     private val onThreshold: Double,
     private val offThreshold: Double
-) : TemperatureObserver {
+) : Observer<Thermometer> {
     private val temperatures = mutableListOf<Double>()
 
-    override fun update(temperatureSubjectData: TemperatureSubjectData) {
-        val tmp = temperatureSubjectData.temp
-        temperatures.add(tmp)
+    override fun update(observableData: Observable.Data<Thermometer>) {
+        val data = observableData as Thermometer.ThermometerData
+        temperatures.add(data.temp)
 
         if (temperatures.size == 5) {
             val avgTemp = temperatures.sum() / temperatures.size

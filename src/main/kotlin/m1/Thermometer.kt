@@ -1,21 +1,13 @@
 package m1
 
-import m1.observer.TemperatureObserver
-import m1.observer.TemperatureSubject
-import m1.observer.TemperatureSubjectData
+import m1.observer.*
 
-class Thermometer(var sensor: Sensor) : TemperatureSubject {
-    override val observers = mutableListOf<TemperatureObserver>()
+class Thermometer(var sensor: Sensor) : Observable<Thermometer> {
+    override val observers: MutableList<Observer<Thermometer>> = mutableListOf()
+    data class ThermometerData(val temp: Double): Observable.Data<Thermometer>()
     fun measure(times: Int) = repeat(times) {
         val temp = sensor.getTemperature()
 
-        updateAll(TemperatureSubjectData(temp))
-    }
-
-    override fun addObserver(observer: TemperatureObserver) {
-        observers.add(observer)
-    }
-    override fun removeObserver(observer: TemperatureObserver) {
-        observers.remove(observer)
+        updateAll(ThermometerData(temp))
     }
 }
