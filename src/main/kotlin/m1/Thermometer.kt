@@ -9,9 +9,7 @@ class Thermometer(var sensor: Sensor) : TemperatureSubject {
     fun measure(times: Int) = repeat(times) {
         val temp = sensor.getTemperature()
 
-        observers.forEach {
-            it.update(TemperatureSubjectData(temp))
-        }
+        updateAll(TemperatureSubjectData(temp))
     }
 
     override fun addObserver(observer: TemperatureObserver) {
