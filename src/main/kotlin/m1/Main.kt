@@ -91,4 +91,9 @@ fun main() {
     thermometer.addObserver(alertObserver)
     thermometer.addObserver(heatingSystemObserver)
     thermometer.measure(20)
+
+    val constantLogRoundSensor = ConstantSensor(10.5)
+        .decorate(::SensorLogger)
+        .decorate(::RoundValue)
+    println(constantLogRoundSensor.getTemperature())
 }

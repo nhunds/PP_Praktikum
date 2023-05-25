@@ -1,5 +1,8 @@
 package m1
 
-interface Sensor {
+import m1.decorator.Decoratable
+import m1.decorator.SensorLogger
+
+interface Sensor: Decoratable<Sensor> {
     fun getTemperature(): Double
 }
