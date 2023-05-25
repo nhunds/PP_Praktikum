@@ -2,6 +2,7 @@ package m1
 
 import m1.observer.TemperatureObserver
 import m1.observer.TemperatureSubject
+import m1.observer.TemperatureSubjectData
 
 class Thermometer(var sensor: Sensor) : TemperatureSubject {
     override val observers = mutableListOf<TemperatureObserver>()
@@ -9,7 +10,7 @@ class Thermometer(var sensor: Sensor) : TemperatureSubject {
         val temp = sensor.getTemperature()
 
         observers.forEach {
-            it.update(temp)
+            it.update(TemperatureSubjectData(temp))
         }
     }
 
