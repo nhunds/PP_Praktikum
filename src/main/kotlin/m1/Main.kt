@@ -1,6 +1,7 @@
 package m1
 
 import m1.decorator.SensorDecorators
+import m1.decorator.SensorLogger
 import m1.observer.HeatingSystemObserver
 import m1.observer.TemperatureAlert
 import m1.strategy.ConstantSensor
@@ -55,7 +56,7 @@ fun main() {
     println("Random sensor:")
     val thermometer = Thermometer(
         RandomSensor(2.0, 8.0)
-            .decorate(SensorDecorators.logger)
+            .decorate(SensorDecorators.logWithPrompt("Debug: "))
     )
     thermometer.measure(10)
 
