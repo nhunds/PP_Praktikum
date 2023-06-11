@@ -40,10 +40,26 @@ fun<A> debug(ordering: Ordering<A>): Ordering<A> = { left, right ->
     orderResult
 }
 
+fun<A, B> Ordering<A>.contraMap(transform: (B) -> A): Ordering<B> = { left, right ->
+    this(transform(left), transform(right))
+}
+
+val personNameOrd = stringOrd.contraMap { person: Person ->
+    person.name
+}
+
+val personAgeOrd = intOrd.contraMap { person: Person ->
+    person.age
+}
+
 fun main() {
     val intDesc = reversed(intOrd)
     val string = debug(stringOrd)
     string("hallo", "weggehen")
     val doubleDesc = debug(reversed(doubleOrd))
     doubleDesc(0.5, 1.5)
+    val person1 = Person("Max Muster", 40)
+    val person2 = Person("Melanie Müller", 30)
+    debug(personNameOrd)(person1, person2)
+    debug(personAgeOrd)(person1, person2)
 }
