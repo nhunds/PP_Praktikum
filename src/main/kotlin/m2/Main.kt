@@ -26,6 +26,14 @@ val booleanOrd: Ordering<Boolean> = { left, right ->
     OrderResult.Equal
 }
 
-fun main() {
+fun<A> reversed(ordering: Ordering<A>): Ordering<A> = { left, right ->
+    when (ordering(left, right)) {
+        OrderResult.Lower -> OrderResult.Higher
+        OrderResult.Higher -> OrderResult.Lower
+        else -> OrderResult.Equal
+    }
+}
 
+fun main() {
+    val intDesc = reversed(intOrd)
 }
