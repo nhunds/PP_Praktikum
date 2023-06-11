@@ -13,6 +13,12 @@ val stringOrd: Ordering<String> = { left, right ->
     if (left > right) OrderResult.Higher
     OrderResult.Equal
 }
+
+val doubleOrd: Ordering<Double> = { left, right ->
+    if (left < right) OrderResult.Lower
+    if (left > right) OrderResult.Higher
+    OrderResult.Equal
+}
 fun main() {
 
 }
