@@ -58,6 +58,16 @@ fun<A, B> Ordering<A>.contraMap(transform: (B) -> A): Ordering<B> = { left ->
     }
 }
 
+fun<A, B> Ordering<A>.zip(otherOrd: Ordering<B>): Ordering<Pair<A, B>> = { left ->
+    { right ->
+        this(left.first)(right.first).let {
+            if (it == OrderResult.Equal)
+                otherOrd(left.second)(right.second)
+            else it
+        }
+    }
+}
+
 val personNameOrd = stringOrd.contraMap { person: Person ->
     person.name
 }
@@ -67,10 +77,21 @@ val personAgeOrd = intOrd.contraMap { person: Person ->
 }
 
 fun main() {
-    stringOrd.reversed()("hallo")("weggehen")
-    doubleOrd.reversed().debug()(0.5)(1.5)
+    stringOrd
+        .reversed()("hallo")("weggehen")
+    doubleOrd
+        .reversed()
+        .debug()(0.5)(1.5)
     val person1 = Person("Max Muster", 40)
-    val person2 = Person("Melanie Müller", 30)
-    personNameOrd.debug()(person1)(person2)
-    personAgeOrd.debug()(person1)(person2)
+    val person2 = Person("Max Muster", 30)
+    personNameOrd
+        .debug()(person1)(person2)
+    personAgeOrd
+        .debug()(person1)(person2)
+    stringOrd
+        .zip(intOrd)
+        .contraMap { person: Person ->
+            person.name to person.age
+        }
+        .debug()(person1)(person2)
 }
