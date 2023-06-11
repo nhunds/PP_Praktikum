@@ -67,11 +67,8 @@ val personAgeOrd = intOrd.contraMap { person: Person ->
 }
 
 fun main() {
-    val intDesc = intOrd.reversed()
-    val string = stringOrd.reversed()
-    string("hallo")("weggehen")
-    val doubleDesc = doubleOrd.reversed().debug()
-    doubleDesc(0.5)(1.5)
+    stringOrd.reversed()("hallo")("weggehen")
+    doubleOrd.reversed().debug()(0.5)(1.5)
     val person1 = Person("Max Muster", 40)
     val person2 = Person("Melanie Müller", 30)
     personNameOrd.debug()(person1)(person2)
