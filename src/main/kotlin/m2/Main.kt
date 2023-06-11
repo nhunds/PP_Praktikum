@@ -19,6 +19,13 @@ val doubleOrd: Ordering<Double> = { left, right ->
     if (left > right) OrderResult.Higher
     OrderResult.Equal
 }
+
+val booleanOrd: Ordering<Boolean> = { left, right ->
+    if (left < right) OrderResult.Lower
+    if (left > right) OrderResult.Higher
+    OrderResult.Equal
+}
+
 fun main() {
 
 }
