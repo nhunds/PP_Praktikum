@@ -82,16 +82,29 @@ fun main() {
     doubleOrd
         .reversed()
         .debug()(0.5)(1.5)
-    val person1 = Person("Max Muster", 40)
-    val person2 = Person("Max Muster", 30)
+    val people = mutableListOf(
+        Person("Nathalie", 25),
+        Person("Alex", 33),
+        Person("Zah", 28),
+        Person("Alex", 18),
+        Person("Jens", 33),
+    )
+    val personOrd = stringOrd
+        .zip(intOrd)
+        .contraMap { person: Person ->
+            person.name to person.age
+        }
+    Sorting().sort(people, personOrd)
+    people.forEach(::println)
     personNameOrd
-        .debug()(person1)(person2)
+        .debug()(people[0])(people[1])
     personAgeOrd
-        .debug()(person1)(person2)
+        .debug()(people[0])(people[1])
     stringOrd
         .zip(intOrd)
         .contraMap { person: Person ->
             person.name to person.age
         }
-        .debug()(person1)(person2)
+        .debug()(people[0])(people[1])
+
 }
