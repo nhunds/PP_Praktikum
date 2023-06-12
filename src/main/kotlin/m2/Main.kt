@@ -83,11 +83,11 @@ fun main() {
         .reversed()
         .debug()(0.5)(1.5)
     val people = mutableListOf(
-        Person("Nathalie", 25),
-        Person("Alex", 33),
-        Person("Zah", 28),
-        Person("Alex", 18),
-        Person("Jens", 33),
+        Person("Nathalie", 25, 172.5),
+        Person("Alex", 33, 186.0),
+        Person("Zah", 28, 158.3),
+        Person("Alex", 18, 183.0),
+        Person("Jens", 33, 168.5),
     )
     val personOrd = stringOrd
         .zip(intOrd)
