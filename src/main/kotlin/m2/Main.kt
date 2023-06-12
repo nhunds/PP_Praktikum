@@ -91,8 +91,9 @@ fun main() {
     )
     val personOrd = stringOrd
         .zip(intOrd)
+        .zip(doubleOrd)
         .contraMap { person: Person ->
-            person.name to person.age
+            person.name to person.age to person.height
         }
     Sorting().sort(people, personOrd)
     people.forEach(::println)
