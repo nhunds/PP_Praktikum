@@ -76,13 +76,42 @@ val personAgeOrd = intOrd.contraMap { person: Person ->
     person.age
 }
 
+fun<A> List<A>.orderBy(ord: Ordering<A>): List<A> {
+    if (this.size <= 1)
+        return this
+
+    val left = this.subList(0, this.size/2).orderBy(ord).toMutableList()
+    val right = this.subList(this.size/2, this.size).orderBy(ord).toMutableList()
+
+    val ret = mutableListOf<A>()
+
+    while (true) {
+        if (left.isEmpty() && right.isEmpty())
+            break
+        else if (left.isEmpty()) {
+            ret.addAll(right)
+            break
+        }
+        else if (right.isEmpty()) {
+            ret.addAll(left)
+            break
+        }
+        else if (ord(left.first())(right.first()) == OrderResult.Higher)
+            ret.add(right.removeFirst())
+        else
+            ret.add(left.removeFirst())
+    }
+
+    return ret
+}
+
 fun main() {
     stringOrd
         .reversed()("hallo")("weggehen")
     doubleOrd
         .reversed()
         .debug()(0.5)(1.5)
-    val people = mutableListOf(
+    val people = listOf(
         Person("Nathalie", 25, 172.5),
         Person("Alex", 33, 186.0),
         Person("Zah", 28, 158.3),
@@ -95,8 +124,7 @@ fun main() {
         .contraMap { person: Person ->
             person.name to person.age to person.height
         }
-    Sorting().sort(people, personOrd)
-    people.forEach(::println)
+    people.orderBy(personOrd).forEach(::println)
     personNameOrd
         .debug()(people[0])(people[1])
     personAgeOrd
